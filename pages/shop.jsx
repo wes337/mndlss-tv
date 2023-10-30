@@ -27,7 +27,7 @@ function Shop() {
         <div className={styles.products}>
           {PRODUCTS.map((product) => (
             <ProductCard
-              key={product.title}
+              key={product.id}
               title={product.title}
               image={product.images[0]}
               price={product.price}

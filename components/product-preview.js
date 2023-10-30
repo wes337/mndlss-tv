@@ -68,9 +68,12 @@ function ProductPreview() {
             <div className={styles["product-preview-price"]}>
               {getPriceInUSD(productPreview.price)}
             </div>
-            <button className={styles["product-preview-buy"]}>
+            <a
+              className={styles["product-preview-buy"]}
+              href={productPreview.link}
+            >
               Buy It Now
-            </button>
+            </a>
             <div className={styles["product-preview-description"]}>
               {productPreview.description}
             </div>
