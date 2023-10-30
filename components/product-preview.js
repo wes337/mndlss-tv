@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import { CDN_URL } from "@/lib/constants";
 import { getPriceInUSD } from "@/lib/utils";
@@ -9,6 +9,7 @@ import styles from "@/styles/product-preview.module.scss";
 function ProductPreview() {
   const [productPreview, setProductPreview] = useAtom(productPreviewAtom);
   const { spray, startSprayInterval, stopSprayInterval } = useSpray();
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   useEffect(() => {
     if (productPreview) {
@@ -26,6 +27,20 @@ function ProductPreview() {
     return null;
   }
 
+  const selectNextOrPrevImage = (next) => {
+    let nextIndex = selectedImageIndex + (next ? 1 : -1);
+
+    if (nextIndex > productPreview.images.length - 1) {
+      nextIndex = 0;
+    }
+
+    if (nextIndex < 0) {
+      nextIndex = productPreview.images.length - 1;
+    }
+
+    setSelectedImageIndex(nextIndex);
+  };
+
   return (
     <>
       <div className={styles["product-preview"]}>
@@ -37,21 +52,25 @@ function ProductPreview() {
             <img src={`${CDN_URL}/images/misc/close.png`} alt="Close" />
           </button>
           <div className={styles["product-preview-images"]}>
-            <button className={styles.previous} onClick={() => {}}>
+            <button
+              className={styles.previous}
+              onClick={() => selectNextOrPrevImage()}
+            >
               <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
             </button>
             <div className={styles["product-preview-image"]}>
-              {productPreview.images.map((image) => {
-                return (
-                  <img
-                    key={image}
-                    src={`${CDN_URL}/images/shop/${image}`}
-                    alt=""
-                  />
-                );
-              })}
+              {productPreview.images.length > 0 && (
+                <img
+                  key={selectedImageIndex}
+                  src={`${CDN_URL}/images/shop/${productPreview.images[selectedImageIndex]}`}
+                  alt=""
+                />
+              )}
             </div>
-            <button className={styles.next} onClick={() => {}}>
+            <button
+              className={styles.next}
+              onClick={() => selectNextOrPrevImage(true)}
+            >
               <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Next" />
             </button>
           </div>

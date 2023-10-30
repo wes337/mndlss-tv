@@ -1,3 +1,15 @@
+import Stripe from "stripe";
+import { sendAssetEmail } from "@/lib/sendgrid";
+
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
+
+async function getCustomerEmail(id) {
+  const customer = await stripe.customers.retrieve(id);
+  return customer.email || null;
+}
+
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -16,6 +28,15 @@ export default async function handler(request, response) {
 
     if (event.type === "payment_intent.succeeded") {
       const paymentIntent = event.data.object;
+      const email =
+        typeof paymentIntent.customer === "string"
+          ? await getCustomerEmail(paymentIntent.customer)
+          : paymentIntent.customer.email;
+
+      const productId = paymentIntent.metadata?.product;
+      const priceId = paymentIntent.priceId;
+
+      await sendAssetEmail(email, productId, priceId);
     }
   } catch (error) {
     return response.status(500).send(error.message);
