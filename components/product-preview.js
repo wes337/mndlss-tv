@@ -102,7 +102,13 @@ function ProductPreview() {
       <div
         className={styles["product-preview-backdrop"]}
         onClick={() => setProductPreview(null)}
-      />
+      >
+        <img
+          className={styles.back}
+          src={`${CDN_URL}/images/shop/promo/${productPreview.id}.png`}
+          alt=""
+        />
+      </div>
     </>
   );
 }

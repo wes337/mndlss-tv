@@ -212,6 +212,15 @@
   z-index: 1;
   background-color: rgba($color-black, 0.8);
 
+  .back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: multiply;
+  }
+
   @include for-phone {
     display: none;
   }
