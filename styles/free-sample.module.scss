@@ -1,0 +1,50 @@
+@import "@/styles/variables.scss";
+
+.free-sample {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "DM Mono", monospace;
+
+  .label {
+    font-size: 1rem;
+  }
+
+  form {
+    display: flex;
+    gap: 0.5rem;
+
+    input {
+      font-family: "DM Mono", monospace;
+      border: 0;
+      padding: 0.5rem;
+      flex-grow: 1;
+      font-size: 16px;
+      color: $color-white;
+      background-color: $color-dark-gray;
+      outline: 2px solid $color-gray;
+      border-radius: 0;
+
+      &:focus {
+        outline: 2px solid $color-light-gray;
+      }
+    }
+
+    button {
+      all: unset;
+      font-family: "DM Mono", monospace;
+      cursor: pointer;
+      font-weight: 300;
+      padding: 0.5rem 1rem;
+      color: $color-white;
+      background-color: $color-gray;
+      text-shadow: 2px 2px 0px $color-black;
+      outline: 2px solid $color-gray;
+
+      &:hover {
+        background-color: $color-dark-gray;
+        outline: 2px solid $color-light-gray;
+      }
+    }
+  }
+}

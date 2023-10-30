@@ -1,0 +1,35 @@
+@import "@/styles/variables.scss";
+
+.home {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .reel-link {
+    all: unset;
+    text-transform: uppercase;
+    font-family: "DM Mono", monospace;
+    position: fixed;
+    bottom: 22%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 300;
+    font-size: 2rem;
+    color: $color-brown;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: $color-white;
+    }
+
+    @include for-phone {
+      bottom: 30%;
+      font-size: 1.4rem;
+    }
+  }
+}

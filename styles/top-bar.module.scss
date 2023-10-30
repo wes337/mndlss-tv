@@ -1,0 +1,66 @@
+@import "@/styles/variables.scss";
+
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $top-bar-height;
+  padding: 0.6rem 1.4rem;
+  z-index: 1;
+
+  @include for-phone {
+    height: $top-bar-height-mobile;
+  }
+
+  .logo {
+    height: 100%;
+
+    button {
+      all: unset;
+      position: relative;
+      display: flex;
+      height: 100%;
+      width: 68px;
+      cursor: pointer;
+
+      @include for-phone {
+        height: $top-bar-height-mobile;
+        width: $top-bar-height-mobile;
+      }
+
+      img {
+        position: absolute;
+        height: 80px;
+        width: 68px;
+        filter: drop-shadow(1px 1px 0px $color-black);
+
+        @include for-phone {
+          height: $top-bar-height-mobile;
+          width: auto;
+        }
+      }
+
+      .hide {
+        opacity: 0;
+      }
+
+      .show {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.light {
+    .logo {
+      button {
+        img {
+          filter: invert(1) drop-shadow(1px 1px 0px $color-light-gray);
+        }
+      }
+    }
+  }
+}

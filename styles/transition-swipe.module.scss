@@ -1,0 +1,32 @@
+@import "@/styles/variables.scss";
+
+.transition-swipe {
+  position: fixed;
+  top: 100%;
+  left: -25%;
+  width: 150vw;
+  height: auto;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+  transition: all 1s ease-out;
+  filter: drop-shadow(0px 0px 1px $color-white);
+
+  &.show {
+    animation: slideUp 1s linear forwards;
+  }
+
+  @include for-phone {
+    width: 300vw;
+    left: -100%;
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-200%);
+    }
+  }
+}

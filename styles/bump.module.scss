@@ -1,0 +1,16 @@
+@import "@/styles/variables.scss";
+
+.bump {
+  mix-blend-mode: multiply;
+
+  video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-37.5vw, -5%);
+    width: 175%;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
+  }
+}

@@ -1,0 +1,32 @@
+@import "@/styles/variables.scss";
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  cursor: none;
+
+  @include for-phone {
+    cursor: auto;
+  }
+}
+
+body {
+  background-color: $color-black;
+  color: $color-white;
+  font-family: "Shadows Into Light", cursive;
+  overflow: hidden;
+
+  &.light {
+    background-color: $color-white;
+    color: $color-black;
+  }
+}

@@ -1,0 +1,29 @@
+@import "@/styles/variables.scss";
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  padding-bottom: 2vh;
+  color: $color-white;
+  width: 60vw;
+  max-width: 900px;
+
+  @include for-large-screens {
+    max-width: 1200px;
+  }
+
+  @include for-short-screens {
+    padding-bottom: 2vh;
+  }
+
+  @include for-phone {
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  @include for-tablet {
+    padding-bottom: 0;
+  }
+}
