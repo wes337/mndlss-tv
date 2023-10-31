@@ -28,6 +28,16 @@
     }
   }
 
+  &.alt {
+    span {
+      color: $color-white;
+    }
+
+    .spray {
+      filter: invert(0);
+    }
+  }
+
   &:last-child {
     padding-right: 3rem;
 

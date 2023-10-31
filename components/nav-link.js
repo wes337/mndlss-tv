@@ -6,6 +6,7 @@ import {
   showTransitionAtom,
   showTransitionSwipeAtom,
   lightModeAtom,
+  altModeAtom,
 } from "@/lib/state";
 import useSpray from "@/hooks/spray";
 import styles from "@/styles/nav-link.module.scss";
@@ -15,6 +16,7 @@ function NavLink({ to, img, label }) {
   const [, setShowTransition] = useAtom(showTransitionAtom);
   const [, setShowTransitionSwipe] = useAtom(showTransitionSwipeAtom);
   const [lightMode] = useAtom(lightModeAtom);
+  const [altMode] = useAtom(altModeAtom);
   const { spray, startSprayInterval, stopSprayInterval } = useSpray();
 
   const isActive = router.pathname === to;
@@ -58,7 +60,7 @@ function NavLink({ to, img, label }) {
     <button
       className={`${styles["nav-link"]} ${isActive ? styles.active : ""} ${
         lightMode ? styles.light : ""
-      }`}
+      } ${altMode ? styles.alt : ""}`}
       onClick={onClick}
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}

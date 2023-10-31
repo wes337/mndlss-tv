@@ -5,10 +5,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: calc($top-bar-height + 2rem);
+  padding-top: calc($top-bar-height + 1rem);
 
   @include for-phone {
-    padding-top: calc($top-bar-height-mobile + 2rem);
+    padding-top: calc($top-bar-height-mobile + 0.5rem);
   }
 
   .shop-note {
@@ -17,7 +17,7 @@
     text-transform: uppercase;
     text-align: center;
     font-weight: 500;
-    color: $color-brown;
+    color: $color-red;
     padding: 1rem;
     letter-spacing: -0.5px;
 
@@ -34,15 +34,15 @@
     justify-content: space-evenly;
     gap: 2rem;
     flex-wrap: wrap;
-    max-height: 55vh;
+    max-height: 65vh;
     overflow: auto;
 
     @include for-phone {
-      max-height: 52vh;
+      max-height: 75vh;
     }
 
     @include for-large-screens {
-      max-height: 65vh;
+      max-height: 75vh;
     }
   }
 }
@@ -57,5 +57,6 @@
   z-index: -1;
   pointer-events: none;
   filter: drop-shadow(0px 0px 1px $color-white);
-  opacity: 0.5;
+  opacity: 1;
+  user-select: none;
 }

@@ -10,7 +10,7 @@ export default function HomePage() {
       </Head>
       <div id="home" className={styles.home}>
         <Bump />
-        <button className={styles["reel-link"]}>/mndlss_reel2022</button>
+        <button className={styles["reel-link"]}>/mndlss_reel</button>
       </div>
     </>
   );

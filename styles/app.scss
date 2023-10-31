@@ -26,8 +26,12 @@ body {
   overflow: hidden;
 
   &.light {
-    background-color: $color-white;
+    background-color: $color-almost-white;
     color: $color-black;
+  }
+
+  &.alt {
+    background-color: darken($color-dark-gray, 3%);
   }
 }
 

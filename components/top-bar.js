@@ -4,6 +4,7 @@ import { useAtom } from "jotai";
 import { CDN_URL } from "@/lib/constants";
 import {
   lightModeAtom,
+  altModeAtom,
   showTransitionAtom,
   productPreviewAtom,
 } from "@/lib/state";
@@ -14,6 +15,7 @@ function TopBar() {
   const [, setShowTransition] = useAtom(showTransitionAtom);
   const [, setProductPreview] = useAtom(productPreviewAtom);
   const [lightMode] = useAtom(lightModeAtom);
+  const [altMode] = useAtom(altModeAtom);
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -40,7 +42,11 @@ function TopBar() {
   };
 
   return (
-    <div className={`${styles["top-bar"]} ${lightMode ? styles.light : ""}`}>
+    <div
+      className={`${styles["top-bar"]} ${lightMode ? styles.light : ""} ${
+        altMode ? styles.alt : ""
+      }`}
+    >
       <div className={styles.logo}>
         <button onClick={onClick}>
           <img

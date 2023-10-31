@@ -1,13 +1,45 @@
 @import "@/styles/variables.scss";
 
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-black, 0.8);
+  z-index: 1;
+}
+
 .free-sample {
+  position: fixed;
+  background-color: $color-black;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   font-family: "DM Mono", monospace;
+  z-index: 2;
+  border: 0.2rem solid $color-light-gray;
+
+  @include for-phone {
+    padding: 2rem;
+  }
 
   .label {
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 500;
+
+    em {
+      color: $color-red;
+    }
+  }
+
+  .sub-label {
     font-size: 1rem;
+    text-align: center;
+    padding: 0.5rem 0;
+    color: $color-light-gray;
   }
 
   .signed-up {
@@ -50,6 +82,28 @@
         background-color: $color-dark-gray;
         outline: 2px solid $color-light-gray;
       }
+    }
+  }
+
+  .close {
+    all: unset;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 32px;
+    margin: 1rem;
+    cursor: pointer;
+    z-index: 1;
+    pointer-events: auto;
+
+    &:hover,
+    &:focus {
+      transform: scale(1.2) rotate(-3deg);
+    }
+
+    img {
+      height: 100%;
+      width: auto;
     }
   }
 }
