@@ -16,7 +16,7 @@ function TransitionSwipe() {
 
     const transitionTimeout = setTimeout(() => {
       setShowTransitionSwipe(false);
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(transitionTimeout);
   }, [showTransitionSwipe, setShowTransitionSwipe]);

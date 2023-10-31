@@ -37,7 +37,7 @@ function NavLink({ to, img, label }) {
     } else {
       setShowTransition(true);
     }
-    setTimeout(() => router.push(to), to === "/shop" ? 500 : 250);
+    setTimeout(() => router.push(to), to === "/shop" ? 1000 : 250);
   };
 
   const onPointerEnter = () => {

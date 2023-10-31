@@ -20,8 +20,8 @@ function Contact() {
         <title>MNDLSS Pictures - Contact</title>
       </Head>
       <div className={styles.contact}>
-        <a href="mailto:mndlsspictures@gmail.com" className={styles.email}>
-          mndlsspictures@gmail.com
+        <a href="mailto:contact@mndlss.tv" className={styles.email}>
+          contact@mndlss.tv
         </a>
         <About />
       </div>
