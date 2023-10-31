@@ -10,7 +10,14 @@ export default function HomePage() {
       </Head>
       <div id="home" className={styles.home}>
         <Bump />
-        <button className={styles["reel-link"]}>/mndlss_reel</button>
+        <a
+          className={styles["reel-link"]}
+          href="https://www.youtube.com/watch?v=-Yd_SSoNgM0"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          /mndlss_reel
+        </a>
       </div>
     </>
   );
