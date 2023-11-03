@@ -13,11 +13,11 @@ export default function About() {
           <em>Alex Luke</em>.
         </p>
         <p>
-          My passion lies in creating immersive media through guerilla shooting
-          techniques, fusing both traditional and contemporary mediums and
-          technologies. I disrupt established media norms, nurturing complete
-          artistic liberty in both my personal practice and the projects I
-          engage with.
+          My passion is rooted in crafting immersive media using guerrilla
+          shooting techniques, seamlessly blending traditional and contemporary
+          mediums and technologies. I challenge conventional media norms,
+          fostering an environment of complete artistic freedom in both my
+          personal work and the projects I undertake.
         </p>
         <p>I embody this concept through MNDLSS.</p>
       </div>

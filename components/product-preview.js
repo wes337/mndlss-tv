@@ -52,12 +52,14 @@ function ProductPreview() {
             <img src={`${CDN_URL}/images/misc/close.png`} alt="Close" />
           </button>
           <div className={styles["product-preview-images"]}>
-            <button
-              className={styles.previous}
-              onClick={() => selectNextOrPrevImage()}
-            >
-              <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
-            </button>
+            {productPreview.images.length > 1 && (
+              <button
+                className={styles.previous}
+                onClick={() => selectNextOrPrevImage()}
+              >
+                <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
+              </button>
+            )}
             <div className={styles["product-preview-image"]}>
               {productPreview.images.length > 0 && (
                 <img
@@ -67,12 +69,14 @@ function ProductPreview() {
                 />
               )}
             </div>
-            <button
-              className={styles.next}
-              onClick={() => selectNextOrPrevImage(true)}
-            >
-              <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Next" />
-            </button>
+            {productPreview.images.length > 1 && (
+              <button
+                className={styles.next}
+                onClick={() => selectNextOrPrevImage(true)}
+              >
+                <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Next" />
+              </button>
+            )}
           </div>
           <div className={styles["product-preview-info"]}>
             <div className={styles["product-preview-title"]}>

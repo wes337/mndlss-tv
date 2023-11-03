@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <div className={`${styles.footer} ${lightMode ? styles.light : ""}`}>
       <Nav />
-      <div className={styles.copyright}>© MNDLSS Pictures 2023</div>
+      <div className={styles.copyright}>© MNDLSS Pictures 2024</div>
     </div>
   );
 }

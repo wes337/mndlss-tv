@@ -1,5 +1,100 @@
 export const PRODUCTS = [
   {
+    id: "gummy-letters",
+    title: "Gummy Letters",
+    description: (
+      <p>
+        A scrumptious collection of high-res digital scans, featuring the 26
+        letters of the alphabet in an irresistible form.
+      </p>
+    ),
+    images: ["gummy-letters.png", "gummy-letters-2.png"],
+    price: 10,
+    price_id: "price_1O58FuDIuA6pssXKuWOP8LYb",
+    link: "https://buy.stripe.com/7sI4gP6l328VdRC3cf",
+  },
+  {
+    id: "big-arrows",
+    title: "Big Arrows",
+    description: (
+      <p>
+        It&apos;s like GPS for your graphics, but bold, featuring 10+ cartoon
+        arrows to kick up your designs.
+      </p>
+    ),
+    images: ["big-arrows.png", "big-arrows-2.png"],
+    price: 10,
+    price_id: "price_1O58HoDIuA6pssXK6ufjpYlu",
+    link: "https://buy.stripe.com/5kA3cL7p7dRD14Q7sy",
+  },
+  {
+    id: "spray-hits",
+    title: "Spray Hits",
+    description: (
+      <>
+        <p>
+          150+ dope graffiti swag inspired by the hip hop OG, Ice-T. It&apos;s
+          like turning your designs into street masterpieces that hit harder
+          than a bass drop, ya feel me?
+        </p>
+        <p>
+          Includes:
+          <ul>
+            <li>Hits</li>
+            <li>Slashes</li>
+            <li>Splats</li>
+            <li>Sprays</li>
+            <li>Texture Pages</li>
+          </ul>
+        </p>
+      </>
+    ),
+    images: ["spray-hits.png", "spray-hits-2.png"],
+    price: 30,
+    price_id: "price_1O58DPDIuA6pssXKweOFpR9p",
+    link: "https://buy.stripe.com/14k8x5aBj4h38xi289",
+  },
+  {
+    id: "krink-hits",
+    title: "Krink Hits",
+    description: (
+      <>
+        <p>
+          The secret sauce for your designs. It&apos;s got 50+ top-notch krink
+          paint elements, bringin&apos; that liquid gold.
+        </p>
+        <p>
+          Includes:
+          <ul>
+            <li>Clusters</li>
+            <li>Dots</li>
+            <li>Hits</li>
+            <li>Lines</li>
+          </ul>
+        </p>
+      </>
+    ),
+    images: ["krink-hits.png", "krink-hits-2.png"],
+    price: 25,
+    price_id: "price_1O58E6DIuA6pssXKQl4xkO1q",
+    link: "https://buy.stripe.com/4gweVt4cV4h3fZK148",
+  },
+  {
+    id: "fonts",
+    title: "Fonts",
+    description: (
+      <p>
+        &quot;Showtime&quot;, &quot;Curatin Call&quot;, and
+        &quot;1MANARMY&quot;, 3 handmade, rough around the edge fonts that add
+        an offbeat charm to your designs. Or just guns, lots of guns.
+      </p>
+    ),
+    images: ["fonts.png"],
+    price: 10,
+    price_id: "price_1O58GWDIuA6pssXK1DOR3Mao",
+    link: "https://buy.stripe.com/aEU7t1fVD28VeVG4gn",
+  },
+  {
     id: "texturo-ultimo",
     title: "Texturo Ultimo",
     description: (
@@ -39,19 +134,20 @@ export const PRODUCTS = [
     link: "https://buy.stripe.com/9AQcNleRz5l7aFqcMM",
   },
   {
-    id: "spray-hits",
-    title: "Spray Hits",
+    id: "crt-world",
+    title: "CRT World",
     description: (
       <p>
-        150+ dope graffiti swag inspired by the hip hop OG, Ice-T. It&apos;s
-        like turning your designs into street masterpieces that hit harder than
-        a bass drop, ya feel me?
+        A set of 4 overlays and 8 unique glitches that&apos;ll take your designs
+        on a nostalgic trip. These elements add a touch of vintage flair and
+        authentic character to your projects, giving them that classic screen
+        vibe.
       </p>
     ),
-    images: ["spray-hits.png", "spray-hits-2.png"],
-    price: 30,
-    price_id: "price_1O58DPDIuA6pssXKweOFpR9p",
-    link: "https://buy.stripe.com/14k8x5aBj4h38xi289",
+    images: ["crt-world.png"],
+    price: 35,
+    price_id: "price_1O58HLDIuA6pssXKS5MVEdfJ",
+    link: "https://buy.stripe.com/8wMcNlaBj7tf3cY8wB",
   },
   {
     id: "reference-library",
@@ -80,79 +176,6 @@ export const PRODUCTS = [
     price: 50,
     price_id: "price_1O58JIDIuA6pssXKBwZqOspH",
     link: "https://buy.stripe.com/00g00z4cV8xjdRC4gi",
-  },
-  {
-    id: "gummy-letters",
-    title: "Gummy Letters",
-    description: (
-      <p>
-        A scrumptious collection of high-res digital scans, featuring the 26
-        letters of the alphabet in an irresistible form.
-      </p>
-    ),
-    images: ["gummy-letters.png", "gummy-letters-2.png"],
-    price: 10,
-    price_id: "price_1O58FuDIuA6pssXKuWOP8LYb",
-    link: "https://buy.stripe.com/7sI4gP6l328VdRC3cf",
-  },
-  {
-    id: "krink-hits",
-    title: "Krink Hits",
-    description: (
-      <p>
-        The secret sauce for your designs. It&apos;s got 50+ top-notch krink
-        paint elements, bringin&apos; that liquid gold.
-      </p>
-    ),
-    images: ["krink-hits.png", "krink-hits-2.png"],
-    price: 25,
-    price_id: "price_1O58E6DIuA6pssXKQl4xkO1q",
-    link: "https://buy.stripe.com/4gweVt4cV4h3fZK148",
-  },
-  {
-    id: "crt-world",
-    title: "CRT World",
-    description: (
-      <p>
-        A set of 4 overlays and 8 unique glitches that&apos;ll take your designs
-        on a nostalgic trip. These elements add a touch of vintage flair and
-        authentic character to your projects, giving them that classic screen
-        vibe.
-      </p>
-    ),
-    images: ["crt-world.png"],
-    price: 35,
-    price_id: "price_1O58HLDIuA6pssXKS5MVEdfJ",
-    link: "https://buy.stripe.com/8wMcNlaBj7tf3cY8wB",
-  },
-  {
-    id: "big-arrows",
-    title: "Big Arrows",
-    description: (
-      <p>
-        It&apos;s like GPS for your graphics, but bold, featuring 10+ cartoon
-        arrows to kick up your designs.
-      </p>
-    ),
-    images: ["big-arrows.png", "big-arrows-2.png"],
-    price: 10,
-    price_id: "price_1O58HoDIuA6pssXK6ufjpYlu",
-    link: "https://buy.stripe.com/5kA3cL7p7dRD14Q7sy",
-  },
-  {
-    id: "fonts",
-    title: "Fonts",
-    description: (
-      <p>
-        &quot;Showtime&quot;, &quot;Curatin Call&quot;, and
-        &quot;1MANARMY&quot;, 3 handmade, rough around the edge fonts that add
-        an offbeat charm to your designs. Or just guns, lots of guns.
-      </p>
-    ),
-    images: ["fonts.png"],
-    price: 10,
-    price_id: "price_1O58GWDIuA6pssXK1DOR3Mao",
-    link: "https://buy.stripe.com/aEU7t1fVD28VeVG4gn",
   },
   {
     id: "master-bundle",

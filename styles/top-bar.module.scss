@@ -54,6 +54,37 @@
     }
   }
 
+  .links {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 32px;
+    margin: 1rem;
+
+    @include for-phone {
+      height: $top-bar-height-mobile / 2;
+    }
+
+    img {
+      height: 100%;
+      width: auto;
+    }
+
+    a {
+      cursor: pointer;
+    }
+
+    .instagram {
+      opacity: 0.8;
+      filter: invert(1);
+
+      &:hover,
+      &:focus {
+        opacity: 1;
+      }
+    }
+  }
+
   &.light {
     .logo {
       button {
@@ -61,6 +92,10 @@
           filter: invert(1) drop-shadow(1px 1px 0px $color-light-gray);
         }
       }
+    }
+
+    .instagram {
+      filter: none;
     }
   }
 }

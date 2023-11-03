@@ -61,6 +61,16 @@ function TopBar() {
           />
         </button>
       </div>
+      <div className={styles.links}>
+        <a
+          className={styles.instagram}
+          href="https://www.instagram.com/mndlss.pictures"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img src={`/images/icons/instagram-logo.png`} alt="Instagram" />
+        </a>
+      </div>
     </div>
   );
 }
