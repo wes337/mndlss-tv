@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { PLACEHOLDER_DESCRIPTION, VIDEOS } from "@/data/work";
+import { useState, useEffect, useCallback } from "react";
+import { VIDEOS } from "@/data/work";
 import { CDN_URL } from "@/lib/constants";
 import WatchButton from "@/components/watch-button";
 import styles from "@/styles/videos.module.scss";
@@ -7,6 +7,40 @@ import styles from "@/styles/videos.module.scss";
 function Videos() {
   const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
   const selectedVideo = VIDEOS[selectedVideoIndex];
+
+  const selectNextOrPrevVideo = useCallback(
+    (next) => {
+      let nextIndex = selectedVideoIndex + (next ? 1 : -1);
+      if (nextIndex > VIDEOS.length - 1) {
+        nextIndex = 0;
+      }
+
+      if (nextIndex < 0) {
+        nextIndex = VIDEOS.length - 1;
+      }
+
+      onSelectVideo(nextIndex);
+    },
+    [selectedVideoIndex]
+  );
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        selectNextOrPrevVideo();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        selectNextOrPrevVideo(true);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectNextOrPrevVideo]);
 
   useEffect(() => {
     const clearVideos = () => {
@@ -54,19 +88,6 @@ function Videos() {
   const onPointerLeave = (index) => {
     const previewVideo = document.getElementById(`preview-video-${index}`);
     previewVideo?.remove();
-  };
-
-  const selectNextOrPrevVideo = (next) => {
-    let nextIndex = selectedVideoIndex + (next ? 1 : -1);
-    if (nextIndex > VIDEOS.length - 1) {
-      nextIndex = 0;
-    }
-
-    if (nextIndex < 0) {
-      nextIndex = VIDEOS.length - 1;
-    }
-
-    onSelectVideo(nextIndex);
   };
 
   return (
@@ -129,10 +150,10 @@ function Videos() {
           >
             {selectedVideo.name}
           </div>
-          <div className={styles.description}>
+          {/* <div className={styles.description}>
             <div className={styles.content}>{selectedVideo.description}</div>
             <div className={styles.filler}>{PLACEHOLDER_DESCRIPTION}</div>
-          </div>
+          </div> */}
           <div className={styles.watch}>
             <WatchButton url={selectedVideo.url} />
           </div>

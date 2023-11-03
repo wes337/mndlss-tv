@@ -45,7 +45,7 @@
       display: flex;
       position: relative;
       z-index: 2;
-      width: 100%;
+      width: 30vw;
       height: 40vh;
       border: 1rem solid darken($color-dark-gray, 3%);
       border-radius: 0.6rem;
@@ -78,10 +78,6 @@
         height: 100%;
         width: auto;
       }
-
-      @include for-desktop {
-        display: none;
-      }
     }
 
     .previous {
@@ -91,6 +87,10 @@
       &:active {
         transform: scale(1.2) scaleX(-1);
       }
+
+      @include for-desktop {
+        left: -5rem;
+      }
     }
 
     .next {
@@ -99,20 +99,42 @@
       &:active {
         transform: scale(1.2);
       }
+
+      @include for-desktop {
+        right: -5rem;
+      }
     }
 
     .video-info {
-      width: 75%;
+      @include for-desktop {
+        position: absolute;
+        z-index: 2;
 
-      margin-bottom: auto;
+        width: 30vw;
+        height: 40vh;
+        display: flex;
+        justify-content: center;
+      }
 
       .name {
         font-size: 2.8rem;
         font-family: "Shadows Into Light", cursive;
-        text-shadow: 2px 2px 0px $color-black, 5px 3px 0px $color-black;
+        color: $color-yellow;
+        font-weight: 700;
+        text-shadow: 2px 2px 0px $color-dark-gray, 5px 3px 0px $color-black;
+
+        @include for-desktop {
+          white-space: nowrap;
+          position: absolute;
+        }
 
         @include for-phone {
+          position: fixed;
+          top: 15%;
+          left: 0;
+          width: 100%;
           text-align: center;
+          z-index: 3;
         }
 
         &.long {
@@ -121,12 +143,12 @@
         }
 
         @include for-desktop {
-          font-size: 4rem;
+          font-size: 5rem;
+          line-height: 1.6rem;
 
           &.long {
-            font-size: 3rem;
+            font-size: 4rem;
             line-height: 2.8rem;
-            padding-right: 0;
           }
         }
 
@@ -136,7 +158,6 @@
           &.long {
             font-size: 4rem;
             line-height: 3rem;
-            padding-right: 0;
           }
         }
 
@@ -195,7 +216,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: auto;
+        z-index: 3;
       }
 
       @include for-phone {
@@ -209,11 +230,12 @@
         .watch {
           position: absolute;
           bottom: 0;
-          left: 0;
-          width: 100%;
+          left: 15%;
+          width: 70%;
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-bottom: 7.5rem;
         }
       }
 
