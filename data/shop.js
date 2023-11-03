@@ -173,7 +173,7 @@ export const PRODUCTS = [
       </>
     ),
     images: ["reference-library.png"],
-    price: 100,
+    price: 50,
     price_id: "price_1O8IUoDIuA6pssXK3sehdOo7",
     link: "https://buy.stripe.com/dR63cLdNveVH00M00a",
   },
@@ -186,7 +186,7 @@ export const PRODUCTS = [
         <em>Does not include our reference library!</em>
       </p>
     ),
-    images: ["master-bundle.png"],
+    images: ["master-bundle-2.png"],
     price: 100,
     price_id: "price_1O6qGWDIuA6pssXKNixpqvH8",
     link: "https://buy.stripe.com/cN2aFdeRzaFr28U3ck",
