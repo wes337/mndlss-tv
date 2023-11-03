@@ -20,11 +20,19 @@ function WatchButton({ url }) {
   }, []);
 
   const onClick = () => {
+    if (!url) {
+      return;
+    }
+
     window.open(url, "_blank");
   };
 
   return (
-    <button className={styles["watch-button"]} onClick={onClick}>
+    <button
+      className={`${styles["watch-button"]} ${!url ? styles.disabled : ""}`}
+      onClick={onClick}
+      disabled={!url}
+    >
       <img
         className={styles.spray}
         key={spray}

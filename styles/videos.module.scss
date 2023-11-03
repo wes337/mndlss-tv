@@ -9,7 +9,7 @@
   z-index: 1;
   padding-bottom: 10vh;
 
-  --max-width: 50vw;
+  --max-width: 60vw;
 
   @include for-tablet {
     --max-width: 95vw;
@@ -111,12 +111,33 @@
         font-family: "Shadows Into Light", cursive;
         text-shadow: 2px 2px 0px $color-black, 5px 3px 0px $color-black;
 
+        @include for-phone {
+          text-align: center;
+        }
+
+        &.long {
+          font-size: 1.8rem;
+          line-height: 1.6rem;
+        }
+
         @include for-desktop {
           font-size: 4rem;
+
+          &.long {
+            font-size: 3rem;
+            line-height: 2.8rem;
+            padding-right: 0;
+          }
         }
 
         @include for-large-screens {
           font-size: 5rem;
+
+          &.long {
+            font-size: 4rem;
+            line-height: 3rem;
+            padding-right: 0;
+          }
         }
 
         @include for-short-screens {
@@ -130,6 +151,7 @@
         font-weight: 300;
         text-align: justify;
         text-shadow: 1px 2px 0px $color-black, 3px 1px 0px $color-black;
+        position: relative;
 
         @include for-desktop {
           font-size: 1.2rem;
@@ -143,12 +165,37 @@
         @include for-short-screens {
           font-size: 1.1rem;
         }
+
+        .content {
+          position: absolute;
+          width: 100%;
+          height: 75%;
+          padding: 1rem 0;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          @include for-phone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+          }
+        }
+
+        .filler {
+          visibility: hidden;
+          user-select: none;
+          pointer-events: none;
+        }
       }
 
       .watch {
         display: flex;
         align-items: center;
-        margin-top: 1rem;
+        justify-content: center;
+        margin-top: auto;
       }
 
       @include for-phone {
@@ -161,10 +208,12 @@
 
         .watch {
           position: absolute;
-          top: 0;
-          right: 0;
-          margin-top: 0;
-          margin: 0.5rem;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
 
@@ -173,6 +222,12 @@
           font-size: 0.9rem;
         }
       }
+    }
+  }
+
+  .video-preview {
+    &:not(&.disabled) {
+      cursor: pointer;
     }
   }
 

@@ -186,7 +186,16 @@ export const PRODUCTS = [
         <em>Does not include our reference library!</em>
       </p>
     ),
-    images: ["master-bundle-2.png"],
+    images: [
+      "master-bundle-3.png",
+      "gummy-letters.png",
+      "big-arrows.png",
+      "spray-hits.png",
+      "krink-hits.png",
+      "fonts.png",
+      "texturo-ultimo.png",
+      "crt-world.png",
+    ],
     price: 100,
     price_id: "price_1O6qGWDIuA6pssXKNixpqvH8",
     link: "https://buy.stripe.com/cN2aFdeRzaFr28U3ck",

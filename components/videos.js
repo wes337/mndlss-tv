@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { VIDEOS } from "@/data/work";
+import { PLACEHOLDER_DESCRIPTION, VIDEOS } from "@/data/work";
 import { CDN_URL } from "@/lib/constants";
 import WatchButton from "@/components/watch-button";
 import styles from "@/styles/videos.module.scss";
@@ -72,10 +72,24 @@ function Videos() {
   return (
     <div className={styles.videos}>
       <div className={styles["selected-video"]}>
-        <div className={styles["video-preview"]}>
+        <div
+          className={`${styles["video-preview"]} ${
+            !selectedVideo.url ? styles.disabled : ""
+          }`}
+          onClick={() => {
+            if (!selectedVideo.url) {
+              return;
+            }
+
+            window.open(selectedVideo.url, "_blank");
+          }}
+        >
           <button
             className={styles.previous}
-            onClick={() => selectNextOrPrevVideo()}
+            onClick={(event) => {
+              event.stopPropagation();
+              selectNextOrPrevVideo();
+            }}
           >
             <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
           </button>
@@ -99,14 +113,26 @@ function Videos() {
           </video>
           <button
             className={styles.next}
-            onClick={() => selectNextOrPrevVideo(true)}
+            onClick={(event) => {
+              event.stopPropagation();
+              selectNextOrPrevVideo(true);
+            }}
           >
             <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Next" />
           </button>
         </div>
         <div className={styles["video-info"]}>
-          <div className={styles.name}>{selectedVideo.name}</div>
-          <div className={styles.description}>{selectedVideo.description}</div>
+          <div
+            className={`${styles.name} ${
+              selectedVideo.name.length >= 19 ? styles.long : ""
+            }`}
+          >
+            {selectedVideo.name}
+          </div>
+          <div className={styles.description}>
+            <div className={styles.content}>{selectedVideo.description}</div>
+            <div className={styles.filler}>{PLACEHOLDER_DESCRIPTION}</div>
+          </div>
           <div className={styles.watch}>
             <WatchButton url={selectedVideo.url} />
           </div>

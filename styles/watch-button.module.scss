@@ -16,7 +16,7 @@
   }
 
   span {
-    font-size: 2rem;
+    font-size: 3rem;
     filter: drop-shadow(1px 1px 0px $color-black);
 
     @include for-phone {
@@ -70,14 +70,22 @@
   &:focus,
   &:active,
   &.active {
-    @include pseudo-bold;
+    &:not(&.disabled) {
+      @include pseudo-bold;
 
-    span {
-      transform: scale(1.2) rotate(-5deg);
-    }
+      span {
+        transform: scale(1.2) rotate(-5deg);
+      }
 
-    .play {
-      transform: scale(1.2) rotate(5deg);
+      .play {
+        transform: scale(1.2) rotate(5deg);
+      }
     }
+  }
+
+  &.disabled {
+    cursor: default;
+    opacity: 0.5;
+    user-select: none;
   }
 }

@@ -12,14 +12,15 @@ export default function About() {
           <span>MNDLSS</span> is the alias of American filmmaker{" "}
           <em>Alex Luke</em>.
         </p>
-        <p>
-          My passion is rooted in crafting immersive media using guerrilla
-          shooting techniques, seamlessly blending traditional and contemporary
-          mediums and technologies. I challenge conventional media norms,
-          fostering an environment of complete artistic freedom in both my
-          personal work and the projects I undertake.
+        <p className={styles.footer}>
+          <a
+            href="https://www.instagram.com/mndlss.pictures"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Not for everyone.
+          </a>
         </p>
-        <p>I embody this concept through MNDLSS.</p>
       </div>
     </div>
   );
