@@ -75,9 +75,9 @@ export const PRODUCTS = [
       </>
     ),
     images: ["krink-hits.png", "krink-hits-2.png"],
-    price: 25,
-    price_id: "price_1O58E6DIuA6pssXKQl4xkO1q",
-    link: "https://buy.stripe.com/4gweVt4cV4h3fZK148",
+    price: 20,
+    price_id: "price_1O8IQADIuA6pssXKscszhtgQ",
+    link: "https://buy.stripe.com/dR6bJh38RcNzdRC3cl",
   },
   {
     id: "fonts",
@@ -145,7 +145,7 @@ export const PRODUCTS = [
       </p>
     ),
     images: ["crt-world.png"],
-    price: 35,
+    price: 30,
     price_id: "price_1O58HLDIuA6pssXKS5MVEdfJ",
     link: "https://buy.stripe.com/8wMcNlaBj7tf3cY8wB",
   },
@@ -173,9 +173,9 @@ export const PRODUCTS = [
       </>
     ),
     images: ["reference-library.png"],
-    price: 50,
-    price_id: "price_1O58JIDIuA6pssXKBwZqOspH",
-    link: "https://buy.stripe.com/00g00z4cV8xjdRC4gi",
+    price: 100,
+    price_id: "price_1O8IUoDIuA6pssXK3sehdOo7",
+    link: "https://buy.stripe.com/dR63cLdNveVH00M00a",
   },
   {
     id: "master-bundle",
