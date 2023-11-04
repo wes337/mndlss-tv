@@ -1,0 +1,39 @@
+@import "@/styles/variables.scss";
+
+.spray-text {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-size: 3rem;
+    font-weight: 700;
+    filter: drop-shadow(1px 1px 0px $color-black);
+
+    @include for-large-screens {
+      font-size: 5rem;
+    }
+
+    @include for-phone {
+      font-size: 2rem;
+      line-height: 1.6rem;
+    }
+
+    &.long {
+      font-size: 2rem;
+    }
+  }
+
+  .spray {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+
+    @include for-large-screens {
+      height: 80%;
+    }
+  }
+}

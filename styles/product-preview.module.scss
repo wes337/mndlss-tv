@@ -97,6 +97,7 @@
         text-transform: uppercase;
         font-weight: 600;
         z-index: 0;
+        text-align: center;
         text-shadow: 2px 2px 0px $color-black, 5px 3px 0px $color-black;
 
         @include for-desktop {
@@ -119,6 +120,7 @@
       .product-preview-price {
         font-weight: 400;
         font-size: 1.2rem;
+        text-align: center;
       }
 
       .product-preview-buy {

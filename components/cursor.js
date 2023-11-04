@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { CDN_URL } from "@/lib/constants";
-import { eventTargetInsideButtonOrATag } from "@/lib/utils";
+import { eventTargetInsideElementTag } from "@/lib/utils";
 import styles from "@/styles/cursor.module.scss";
 
 export default function Cursor() {
@@ -13,7 +13,7 @@ export default function Cursor() {
       setPositionX(event.clientX);
       setPositionY(event.clientY);
 
-      const hide = eventTargetInsideButtonOrATag(event);
+      const hide = eventTargetInsideElementTag(event);
       setHide(hide);
     };
 

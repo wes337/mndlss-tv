@@ -1,15 +1,29 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { VIDEOS } from "@/data/work";
+import { getYouTubeIdFromURL } from "@/lib/utils";
 import { CDN_URL } from "@/lib/constants";
 import WatchButton from "@/components/watch-button";
 import styles from "@/styles/videos.module.scss";
+import SprayText from "./spray-text.js";
 
 function Videos() {
-  const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
-  const selectedVideo = VIDEOS[selectedVideoIndex];
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(1);
+  const selectedVideo = useMemo(
+    () => VIDEOS[selectedVideoIndex],
+    [selectedVideoIndex]
+  );
 
-  const selectNextOrPrevVideo = useCallback(
-    (next) => {
+  useEffect(() => {
+    const videoButton = document.getElementById(`select-${selectedVideoIndex}`);
+    videoButton.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "center",
+    });
+  }, [selectedVideoIndex]);
+
+  const selectNextOrPrevVideo = (next) => {
+    setSelectedVideoIndex((selectedVideoIndex) => {
       let nextIndex = selectedVideoIndex + (next ? 1 : -1);
       if (nextIndex > VIDEOS.length - 1) {
         nextIndex = 0;
@@ -19,55 +33,12 @@ function Videos() {
         nextIndex = VIDEOS.length - 1;
       }
 
-      onSelectVideo(nextIndex);
-    },
-    [selectedVideoIndex]
-  );
-
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        selectNextOrPrevVideo();
-      }
-
-      if (event.key === "ArrowRight") {
-        event.preventDefault();
-        selectNextOrPrevVideo(true);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectNextOrPrevVideo]);
-
-  useEffect(() => {
-    const clearVideos = () => {
-      document
-        .querySelectorAll("animated")
-        .forEach((element) => element.remove());
-    };
-
-    clearVideos();
-
-    return () => {
-      clearVideos();
-    };
-  }, []);
-
-  const onSelectVideo = (index) => {
-    setSelectedVideoIndex(index);
-    const videoButton = document.getElementById(`video-${index}`);
-    videoButton.scrollIntoView({
-      behavior: "smooth",
-      inline: "center",
-      block: "center",
+      return nextIndex;
     });
   };
 
   const onPointerEnter = (index) => {
-    const videoButton = document.getElementById(`video-${index}`);
+    const videoButton = document.getElementById(`select-${index}`);
 
     const previewVideo = document.createElement("video");
 
@@ -92,83 +63,75 @@ function Videos() {
 
   return (
     <div className={styles.videos}>
+      <div className={styles.title}>
+        <SprayText text={selectedVideo.name} />
+      </div>
+      <button
+        className={styles.previous}
+        onClick={(event) => {
+          event.stopPropagation();
+          selectNextOrPrevVideo();
+        }}
+      >
+        <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
+      </button>
       <div className={styles["selected-video"]}>
-        <div
-          className={`${styles["video-preview"]} ${
-            !selectedVideo.url ? styles.disabled : ""
-          }`}
-          onClick={() => {
-            if (!selectedVideo.url) {
-              return;
-            }
-
-            window.open(selectedVideo.url, "_blank");
-          }}
-        >
-          <button
-            className={styles.previous}
-            onClick={(event) => {
-              event.stopPropagation();
-              selectNextOrPrevVideo();
-            }}
-          >
-            <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
-          </button>
-          <img
-            className={styles.vignette}
-            src={`${CDN_URL}/images/misc/vignette.png`}
-            alt=""
+        <div className={styles["desktop-large"]}>
+          <iframe
+            key={selectedVideo.name}
+            type="text/html"
+            width="900"
+            height="475"
+            src={`https://www.youtube.com/embed/${getYouTubeIdFromURL(
+              selectedVideo.url
+            )}?autoplay=0&origin=https://mndlss.tv`}
+            frameborder="0"
           />
-          <video
-            key={selectedVideo.image}
-            className={styles.animated}
-            autoPlay
-            playsInline
-            muted
-            loop
-          >
-            <source
-              src={`${CDN_URL}/gifs/${selectedVideo.image}.mp4`}
-              type="video/mp4"
-            />
-          </video>
-          <button
-            className={styles.next}
-            onClick={(event) => {
-              event.stopPropagation();
-              selectNextOrPrevVideo(true);
-            }}
-          >
-            <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Next" />
-          </button>
         </div>
-        <div className={styles["video-info"]}>
-          <div
-            className={`${styles.name} ${
-              selectedVideo.name.length >= 19 ? styles.long : ""
-            }`}
-          >
-            {selectedVideo.name}
-          </div>
-          {/* <div className={styles.description}>
-            <div className={styles.content}>{selectedVideo.description}</div>
-            <div className={styles.filler}>{PLACEHOLDER_DESCRIPTION}</div>
-          </div> */}
-          <div className={styles.watch}>
-            <WatchButton url={selectedVideo.url} />
-          </div>
+        <div className={styles.desktop}>
+          <iframe
+            key={selectedVideo.name}
+            type="text/html"
+            width="640"
+            height="360"
+            src={`https://www.youtube.com/embed/${getYouTubeIdFromURL(
+              selectedVideo.url
+            )}?autoplay=0&origin=https://mndlss.tv`}
+            frameborder="0"
+          />
+        </div>
+        <div className={styles.mobile}>
+          <iframe
+            key={selectedVideo.name}
+            type="text/html"
+            width="300"
+            height="150"
+            src={`https://www.youtube.com/embed/${getYouTubeIdFromURL(
+              selectedVideo.url
+            )}?autoplay=0&origin=https://mndlss.tv`}
+            frameborder="0"
+          />
         </div>
       </div>
+      <button
+        className={styles.next}
+        onClick={(event) => {
+          event.stopPropagation();
+          selectNextOrPrevVideo(true);
+        }}
+      >
+        <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Next" />
+      </button>
       <div className={styles["video-scroller"]}>
         {VIDEOS.map((video, index) => {
           return (
             <button
-              id={`video-${index}`}
-              className={`${styles.video} ${
-                selectedVideoIndex === index ? styles.selected : ""
+              key={`select-${video.name}`}
+              id={`select-${index}`}
+              className={`${styles["video-scroller-option"]} ${
+                index === selectedVideoIndex ? styles.selected : ""
               }`}
-              key={video.name}
-              onClick={() => onSelectVideo(index)}
+              onClick={() => setSelectedVideoIndex(index)}
               onPointerEnter={() => onPointerEnter(index)}
               onPointerLeave={() => onPointerLeave(index)}
             >

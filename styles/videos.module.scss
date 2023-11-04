@@ -1,360 +1,244 @@
 @import "@/styles/variables.scss";
 
 .videos {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  z-index: 1;
+  width: 75vw;
+
+  height: 100%;
   justify-content: center;
   align-items: center;
-  z-index: 1;
-  padding-bottom: 10vh;
 
-  --max-width: 60vw;
+  padding-top: $top-bar-height / 3;
+  padding-bottom: 6rem;
 
-  @include for-tablet {
-    --max-width: 95vw;
+  @include for-phone {
+    width: 100vw;
   }
 
   @include for-short-screens {
-    --max-width: 75vw;
+    padding-top: 0;
+    padding-bottom: 2rem;
   }
 
-  @include for-small-phone {
-    padding-bottom: 5rem;
-    gap: 0.5rem;
+  @include for-large-screens {
+    padding-bottom: 10rem;
   }
 
-  .selected-video {
+  .title {
+    grid-column: 1 / 4;
+    grid-row: 1 / 2;
+
+    text-align: center;
+    font-size: 4rem;
+    line-height: 3rem;
+
+    text-shadow: 2px 2px 0px $color-dark-gray, 5px 3px 0px $color-black;
+    z-index: 1;
+
+    height: 5rem;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    max-width: var(--max-width);
-
-    @include for-phone {
-      flex-direction: column;
-      width: 95vw;
-      max-width: 100%;
-    }
-
-    @include for-small-phone {
-      gap: 0.5rem;
-    }
-
-    .video-preview {
-      display: flex;
-      position: relative;
-      z-index: 2;
-      width: 30vw;
-      height: 40vh;
-      border: 1rem solid darken($color-dark-gray, 3%);
-      border-radius: 0.6rem;
-
-      filter: drop-shadow(0px 0px 16px rgba($color-white, 0.2));
-
-      @include for-phone {
-        width: 340px;
-        height: 255px;
-        margin: auto;
-      }
-
-      @include for-small-phone {
-        border: 0.75rem solid $color-dark-gray;
-        width: 275px;
-        height: 200px;
-      }
-    }
-
-    .previous,
-    .next {
-      all: unset;
-      cursor: pointer;
-      position: absolute;
-      top: 45%;
-      height: 40px;
-      z-index: 3;
-
-      img {
-        height: 100%;
-        width: auto;
-      }
-    }
-
-    .previous {
-      left: -2rem;
-      transform: scaleX(-1);
-
-      &:active {
-        transform: scale(1.2) scaleX(-1);
-      }
-
-      @include for-desktop {
-        left: -5rem;
-      }
-    }
-
-    .next {
-      right: -2rem;
-
-      &:active {
-        transform: scale(1.2);
-      }
-
-      @include for-desktop {
-        right: -5rem;
-      }
-    }
-
-    .video-info {
-      @include for-desktop {
-        position: absolute;
-        z-index: 2;
-
-        width: 30vw;
-        height: 40vh;
-        display: flex;
-        justify-content: center;
-      }
-
-      .name {
-        font-size: 2.8rem;
-        font-family: "Shadows Into Light", cursive;
-        color: $color-yellow;
-        font-weight: 700;
-        text-shadow: 2px 2px 0px $color-dark-gray, 5px 3px 0px $color-black;
-
-        @include for-desktop {
-          white-space: nowrap;
-          position: absolute;
-        }
-
-        @include for-phone {
-          position: fixed;
-          top: 15%;
-          left: 0;
-          width: 100%;
-          text-align: center;
-          z-index: 3;
-        }
-
-        &.long {
-          font-size: 1.8rem;
-          line-height: 1.6rem;
-        }
-
-        @include for-desktop {
-          font-size: 5rem;
-          line-height: 1.6rem;
-
-          &.long {
-            font-size: 4rem;
-            line-height: 2.8rem;
-          }
-        }
-
-        @include for-large-screens {
-          font-size: 5rem;
-
-          &.long {
-            font-size: 4rem;
-            line-height: 3rem;
-          }
-        }
-
-        @include for-short-screens {
-          font-size: 3rem;
-        }
-      }
-
-      .description {
-        font-family: "DM Mono", monospace;
-        color: $color-light-gray;
-        font-weight: 300;
-        text-align: justify;
-        text-shadow: 1px 2px 0px $color-black, 3px 1px 0px $color-black;
-        position: relative;
-
-        @include for-desktop {
-          font-size: 1.2rem;
-        }
-
-        @include for-large-screens {
-          font-size: 1.4rem;
-          line-height: 1.8rem;
-        }
-
-        @include for-short-screens {
-          font-size: 1.1rem;
-        }
-
-        .content {
-          position: absolute;
-          width: 100%;
-          height: 75%;
-          padding: 1rem 0;
-          top: 0;
-          left: 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-
-          @include for-phone {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-          }
-        }
-
-        .filler {
-          visibility: hidden;
-          user-select: none;
-          pointer-events: none;
-        }
-      }
-
-      .watch {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 3;
-      }
-
-      @include for-phone {
-        position: relative;
-        width: 100%;
-
-        .name {
-          font-size: 2rem;
-        }
-
-        .watch {
-          position: absolute;
-          bottom: 0;
-          left: 15%;
-          width: 70%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 7.5rem;
-        }
-      }
-
-      @include for-small-phone {
-        .description {
-          font-size: 0.9rem;
-        }
-      }
-    }
-  }
-
-  .video-preview {
-    &:not(&.disabled) {
-      cursor: pointer;
-    }
-  }
-
-  .video-preview,
-  .video {
-    .vignette,
-    .still,
-    .animated {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      user-select: none;
-      pointer-events: none;
-    }
-
-    .vignette {
-      z-index: 2;
-      object-fit: fill;
-      pointer-events: none;
-    }
-
-    .still {
-      z-index: 0;
-      filter: grayscale(1);
-    }
-
-    &.selected {
-      outline: 1px solid rgba($color-white, 0.5);
-      outline-offset: 4px;
-
-      .still {
-        filter: none;
-      }
-    }
-
-    &:before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      content: " ";
-      background: linear-gradient(
-          transparentize($color-dark-gray, 1) 50%,
-          transparentize(darken($color-dark-gray, 10), 0.75) 50%
-        ),
-        linear-gradient(
-          90deg,
-          transparentize(#ff0000, 0.94),
-          transparentize(#00ff00, 0.98),
-          transparentize(#0000ff, 0.94)
-        );
-      background-size: 100% 2px, 3px 100%;
-      pointer-events: none;
-      z-index: 3;
-    }
-  }
-
-  .video {
-    all: unset;
-    position: relative;
-    display: flex;
-    flex-grow: 1;
-    flex-shrink: 0;
-    width: 200px;
-    height: 150px;
-    cursor: pointer;
-    border: 0.5rem solid $color-dark-gray;
-    border-radius: 0.3rem;
-
-    @include for-phone {
-      width: 100px;
-      height: 75px;
-    }
-
-    @include for-small-phone {
-      border: 0.25rem solid $color-dark-gray;
-      width: 80px;
-      height: 60px;
-    }
 
     @include for-short-screens {
-      width: 100px;
-      height: 75px;
+      height: 2rem;
+    }
+  }
+
+  .previous {
+    all: unset;
+
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: scaleX(-1);
+
+    &:active {
+      transform: scale(1.2) scaleX(-1);
     }
 
-    &:hover,
-    &:focus {
-      filter: drop-shadow(0px 0px 8px rgba($color-white, 0.3));
+    img {
+      pointer-events: none;
+      user-select: none;
+      height: 5vh;
+      width: auto;
+    }
+  }
+
+  .selected-video {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1rem solid $color-dark-gray;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 16px rgba($color-white, 0.05);
+    outline: 1px solid rgba($color-white, 0.2);
+
+    .desktop-large {
+      display: none;
+
+      @include for-large-screens {
+        display: flex;
+      }
+    }
+
+    .desktop {
+      display: none;
+
+      @include for-desktop {
+        display: flex;
+      }
+
+      @include for-large-screens {
+        display: none;
+      }
+    }
+
+    .mobile {
+      display: none;
+
+      @include for-phone {
+        display: flex;
+      }
+    }
+  }
+
+  .next {
+    all: unset;
+
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:active {
+      transform: scale(1.2);
+    }
+
+    img {
+      pointer-events: none;
+      user-select: none;
+      height: 5vh;
+      width: auto;
     }
   }
 
   .video-scroller {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+
     display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
     gap: 1rem;
-    padding: 1rem 5px;
-    overflow: auto;
-    max-width: var(--max-width);
+    padding: 1rem;
+    margin-bottom: 2rem;
     width: 100%;
 
-    @include for-phone {
-      max-width: 95vw;
+    @include for-desktop {
+      margin-bottom: 0;
+    }
+
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+
+    .video-scroller-option {
+      all: unset;
+      cursor: pointer;
+      width: 200px;
+      height: 150px;
+      flex-shrink: 0;
+      position: relative;
+
+      border: 0.5rem solid $color-dark-gray;
+      border-radius: 0.2rem;
+
+      filter: grayscale(1);
+
+      @include for-phone {
+        width: 100px;
+        height: 75px;
+      }
+
+      @include for-small-phone {
+        border: 0.25rem solid $color-dark-gray;
+        width: 80px;
+        height: 60px;
+      }
+
+      @include for-short-screens {
+        width: 100px;
+        height: 75px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .vignette {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: fill;
+      }
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        content: " ";
+        background: linear-gradient(
+            transparentize($color-dark-gray, 1) 50%,
+            transparentize(darken($color-dark-gray, 10), 0.75) 50%
+          ),
+          linear-gradient(
+            90deg,
+            transparentize(#ff0000, 0.94),
+            transparentize(#00ff00, 0.98),
+            transparentize(#0000ff, 0.94)
+          );
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      &.selected {
+        filter: grayscale(0);
+        outline: 1px solid rgba($color-white, 0.5);
+        outline-offset: 4px;
+      }
+
+      &:hover,
+      &:focus {
+        filter: grayscale(0);
+        box-shadow: 0px 0px 10px rgba($color-white, 0.75);
+
+        &:before {
+          opacity: 0.5;
+        }
+      }
     }
   }
 }
