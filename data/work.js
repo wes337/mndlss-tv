@@ -7,6 +7,7 @@ export const VIDEOS = [
     description: "COMING SOON",
     url: null,
     image: "world-peace",
+    comingSoon: true,
   },
   {
     // 2

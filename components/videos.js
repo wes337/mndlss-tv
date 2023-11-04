@@ -76,42 +76,25 @@ function Videos() {
         <img src={`${CDN_URL}/images/misc/arrow.png`} alt="Prev" />
       </button>
       <div className={styles["selected-video"]}>
-        <div className={styles["desktop-large"]}>
+        {selectedVideo.comingSoon ? (
+          <div className={styles["coming-soon-video"]}>
+            <div className={styles.text}>Coming Soon</div>
+            <video autoPlay playsInline muted loop type="video/mp4">
+              <source src={`${CDN_URL}/gifs/${selectedVideo.image}.mp4`} />
+            </video>
+          </div>
+        ) : (
           <iframe
             key={selectedVideo.name}
+            width={900}
+            height={475}
             type="text/html"
-            width="900"
-            height="475"
             src={`https://www.youtube.com/embed/${getYouTubeIdFromURL(
               selectedVideo.url
             )}?autoplay=0&origin=https://mndlss.tv`}
             frameborder="0"
           />
-        </div>
-        <div className={styles.desktop}>
-          <iframe
-            key={selectedVideo.name}
-            type="text/html"
-            width="640"
-            height="360"
-            src={`https://www.youtube.com/embed/${getYouTubeIdFromURL(
-              selectedVideo.url
-            )}?autoplay=0&origin=https://mndlss.tv`}
-            frameborder="0"
-          />
-        </div>
-        <div className={styles.mobile}>
-          <iframe
-            key={selectedVideo.name}
-            type="text/html"
-            width="300"
-            height="150"
-            src={`https://www.youtube.com/embed/${getYouTubeIdFromURL(
-              selectedVideo.url
-            )}?autoplay=0&origin=https://mndlss.tv`}
-            frameborder="0"
-          />
-        </div>
+        )}
       </div>
       <button
         className={styles.next}
