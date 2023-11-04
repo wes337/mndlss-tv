@@ -1,13 +1,12 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { VIDEOS } from "@/data/work";
 import { getYouTubeIdFromURL } from "@/lib/utils";
 import { CDN_URL } from "@/lib/constants";
-import WatchButton from "@/components/watch-button";
+import SprayText from "@/components/spray-text";
 import styles from "@/styles/videos.module.scss";
-import SprayText from "./spray-text.js";
 
 function Videos() {
-  const [selectedVideoIndex, setSelectedVideoIndex] = useState(1);
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState(0);
   const selectedVideo = useMemo(
     () => VIDEOS[selectedVideoIndex],
     [selectedVideoIndex]
