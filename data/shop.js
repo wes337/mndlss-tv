@@ -144,7 +144,12 @@ export const PRODUCTS = [
         vibe.
       </p>
     ),
-    images: ["crt-world.png"],
+    images: [
+      "crt-world-1.png",
+      "crt-world-2.png",
+      "crt-world-3.png",
+      "crt-world-4.png",
+    ],
     price: 30,
     price_id: "price_1O58HLDIuA6pssXKS5MVEdfJ",
     link: "https://buy.stripe.com/8wMcNlaBj7tf3cY8wB",
