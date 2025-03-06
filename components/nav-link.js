@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAtom } from "jotai";
+import { preloadUrl } from "@/lib/utils";
 import { CDN_URL } from "@/lib/constants";
 import {
   showTransitionAtom,
@@ -20,6 +21,10 @@ function NavLink({ to, img, label }) {
   const { spray, startSprayInterval, stopSprayInterval } = useSpray();
 
   const isActive = router.pathname === to;
+
+  useEffect(() => {
+    preloadUrl(to);
+  }, [to]);
 
   useEffect(() => {
     if (isActive) {

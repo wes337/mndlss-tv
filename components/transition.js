@@ -34,7 +34,7 @@ function Transition() {
     <div
       className={`${styles.transition} ${showTransition ? styles.show : ""}`}
     >
-      <video ref={videoRef} muted playsInline fetchPriority="high">
+      <video ref={videoRef} muted playsInline fetchpriority="high">
         <source src={`${CDN_URL}/videos/text-muted-comp.mp4`} />
       </video>
     </div>
