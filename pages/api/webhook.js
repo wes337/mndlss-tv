@@ -1,11 +1,16 @@
 import Stripe from "stripe";
-import { headers } from "next/headers";
-import { NextResponse } from "next/server";
+import { buffer } from "micro";
 import { sendAssetEmail } from "@/lib/sendgrid";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 async function getCustomerEmail(id) {
   const customer = await stripe.customers.retrieve(id);
@@ -43,6 +48,7 @@ async function getProductFromCheckoutSession(paymentIntentId) {
     });
 
     const lineItem = lineItems.data[0];
+
     return {
       priceId: lineItem.price.id,
       productId: lineItem.price.product.id || lineItem.price.product,
@@ -71,31 +77,35 @@ async function getProductFromCharge(paymentIntent) {
   return null;
 }
 
-export async function POST(request) {
-  const body = await request.text();
-  const signature = headers().get("stripe-signature");
+export default async function handler(request, response) {
+  if (request.method !== "POST") {
+    response.setHeader("Allow", "POST");
+    response.status(405).end("Method Not Allowed");
+    return;
+  }
+
+  const requestBuffer = await buffer(request);
+  const signature = request.headers["stripe-signature"];
 
   let event;
 
   try {
     event = stripe.webhooks.constructEvent(
-      body,
+      requestBuffer,
       signature,
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (error) {
     console.error(`Webhook signature verification failed: ${error.message}`);
-    return NextResponse.json(
-      { error: `Webhook Error: ${error.message}` },
-      { status: 400 }
-    );
+    return response
+      .status(400)
+      .json({ error: `Webhook Error: ${error.message}` });
   }
 
   try {
     if (event.type === "payment_intent.succeeded") {
       const paymentIntent = event.data.object;
 
-      // Get customer email
       const email =
         typeof paymentIntent.customer === "string"
           ? await getCustomerEmail(paymentIntent.customer)
@@ -103,10 +113,7 @@ export async function POST(request) {
 
       if (!email) {
         console.error("No email found for customer");
-        return NextResponse.json(
-          { error: "No customer email found" },
-          { status: 400 }
-        );
+        return response.status(400).json({ error: "No customer email found" });
       }
 
       let productInfo = null;
@@ -119,34 +126,43 @@ export async function POST(request) {
           productId: paymentIntent.metadata.productId,
           priceId: paymentIntent.metadata.priceId,
         };
+        console.log("Got product info from metadata:", productInfo);
       }
 
       if (!productInfo) {
         productInfo = await getProductFromCheckoutSession(paymentIntent.id);
+        if (productInfo) {
+          console.log("Got product info from checkout session:", productInfo);
+        }
       }
 
       if (!productInfo && paymentIntent.invoice) {
         productInfo = await getProductFromInvoice(paymentIntent);
+        if (productInfo) {
+          console.log("Got product info from invoice:", productInfo);
+        }
       }
 
       if (!productInfo) {
         productInfo = await getProductFromCharge(paymentIntent);
+        if (productInfo) {
+          console.log("Got product info from charge:", productInfo);
+        }
       }
 
       if (!productInfo) {
         console.error("No product information found");
-        return NextResponse.json(
-          { error: "No product information found" },
-          { status: 400 }
-        );
+        return response
+          .status(400)
+          .json({ error: "No product information found" });
       }
 
       await sendAssetEmail(email, productInfo.productId, productInfo.priceId);
     }
   } catch (error) {
     console.error(`Webhook handler failed: ${error.message}`);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return response.status(500).json({ error: error.message });
   }
 
-  return NextResponse.json({ received: true }, { status: 200 });
+  return response.status(200).json({ received: true });
 }
