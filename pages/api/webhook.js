@@ -33,6 +33,18 @@ async function getProductFromInvoice(paymentIntent) {
   };
 }
 
+async function getEmailFromCharge(paymentIntent) {
+  if (!paymentIntent.latest_charge) return null;
+
+  try {
+    const charge = await stripe.charges.retrieve(paymentIntent.latest_charge);
+    return charge.billing_details?.email || charge.receipt_email || null;
+  } catch (error) {
+    console.error("Error fetching charge:", error);
+    return null;
+  }
+}
+
 async function getProductFromCheckoutSession(paymentIntentId) {
   try {
     const sessions = await stripe.checkout.sessions.list({
@@ -77,6 +89,22 @@ async function getProductFromCharge(paymentIntent) {
   return null;
 }
 
+async function getEmailFromCheckoutSession(paymentIntentId) {
+  try {
+    const sessions = await stripe.checkout.sessions.list({
+      payment_intent: paymentIntentId,
+    });
+
+    if (sessions.data.length === 0) return null;
+
+    const session = sessions.data[0];
+    return session.customer_details?.email || session.customer_email || null;
+  } catch (error) {
+    console.error("Error fetching checkout session for email:", error);
+    return null;
+  }
+}
+
 export default async function handler(request, response) {
   if (request.method !== "POST") {
     response.setHeader("Allow", "POST");
@@ -106,13 +134,35 @@ export default async function handler(request, response) {
     if (event.type === "payment_intent.succeeded") {
       const paymentIntent = event.data.object;
 
-      const email =
-        typeof paymentIntent.customer === "string"
-          ? await getCustomerEmail(paymentIntent.customer)
-          : paymentIntent.customer?.email;
+      let email = null;
+
+      if (paymentIntent.customer) {
+        email =
+          typeof paymentIntent.customer === "string"
+            ? await getCustomerEmail(paymentIntent.customer)
+            : paymentIntent.customer?.email;
+      }
+
+      if (!email && paymentIntent.receipt_email) {
+        email = paymentIntent.receipt_email;
+      }
 
       if (!email) {
-        console.error("No email found for customer");
+        email = await getEmailFromCharge(paymentIntent);
+        if (email) {
+          console.log("Got email from charge:", email);
+        }
+      }
+
+      if (!email) {
+        email = await getEmailFromCheckoutSession(paymentIntent.id);
+        if (email) {
+          console.log("Got email from checkout session:", email);
+        }
+      }
+
+      if (!email) {
+        console.error("No email found for payment intent:", paymentIntent.id);
         return response.status(400).json({ error: "No customer email found" });
       }
 
