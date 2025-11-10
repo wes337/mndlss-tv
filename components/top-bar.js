@@ -64,7 +64,7 @@ function TopBar() {
       <div className={styles.links}>
         <a
           className={styles.instagram}
-          href="https://www.instagram.com/mndlss.pictures"
+          href="https://www.instagram.com/mndlss"
           target="_blank"
           rel="noopener noreferrer"
         >
