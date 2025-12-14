@@ -14,7 +14,7 @@ export default function About() {
         </p>
         <p className={styles.footer}>
           <a
-            href="https://www.instagram.com/mndlss.pictures"
+            href="https://www.instagram.com/mndlss"
             target="_blank"
             rel="noopener noreferrer"
           >
